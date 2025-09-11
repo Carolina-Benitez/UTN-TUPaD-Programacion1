@@ -54,47 +54,40 @@ else:
 
 #Tomar lista numeros_aleatorios, calcule moda, mediana y media y las compare para definir si hay sesgo positivo, negativo o no hay.
 
+# Importamos todas los paquetes y funciones que necesitamos utilizar
 import random
-import statistics
+from statistics import mode, median, mean
 
-#definir la lista numeros_aleatorios
-numeros_aleatorios = {random.randint(1, 100) for i in range(50)}
+# Generamos una lista de 50 números de forma aleatoria
+numeros_aleatorios = [random.randint(1, 100) for i in range(50)]
 
-#calcular la media, mediana y moda
-media= statistics.mean(numeros_aleatorios)
-mediana = statistics.median(numeros_aleatorios)
+# Calculamos la moda, la mediana y la media de la lista numeros_aleatorios
+moda = mode(numeros_aleatorios)
+mediana = median(numeros_aleatorios)
+media = mean(numeros_aleatorios)
 
-#intentamos obtener moda, puede haber un error si no existe una moda clara
-try:
-    moda = statistics.mode(numeros_aleatorios)
-except statistics.StatisticsError:
-    moda = "No hay una moda unica"
+# Si la media es mayor que la mediana y la mediana es mayor que la moda, imprimir "Sesgo positivo o a la derecha"
+if media > mediana > moda:
+  print("Sesgo positivo o a la derecha")
 
-#imprimimos los resultados
-print("Lista de numeros aleatorios:" , numeros_aleatorios)
-print("Media:", media)
-print("mediana:", mediana)
-print("Moda:", moda)
+# Si la media es menor que la mediana y la mediana es menor que la moda, imprimir "Sesgo negativo o a la izquierda"
+elif media < mediana < moda:
+  print("Sesgo negativo o a la izquierda")
 
-#determinamos si hay sesgo
-if isinstance(moda, int): #solo comparamos si hay una moda
-    if media > mediana and media > moda:
-        sesgo = "Sesgo positivo"
-    elif media < mediana and media < moda: 
-        sesgo = "Sesgo negativo"
-    else:
-        sesgo = "No hay sesgo"
+# Si la media, la mediana y la moda son iguales, imprimir "Sin sesgo"
+elif media == mediana == moda:
+  print("Sin sesgo")
+  
+# Si no se cumple ninguna de las condiciones anteriores, imprimir "No se puede determinar si esta distribución tiene sesgo o no"
 else:
-    sesgo = "No se puede determinar sesgo debido a que no hay una moda unica."
-
-print("Sesgo:", sesgo)
+  print("No se puede determinar si esta distribución tiene sesgo o no")
 
 
 #Solicite una frase o palabra. Si termina con vocal, añadir un signo de exclamación al final; sino, dejarlo tal cual lo ingresó
 
 palabra = input("Ingresa una palabra o frase: ")
 
-#obtener el ultimo caracter 
+#obtener el ultimo caracter usando el indice
 ultima_letra = palabra[-1]
 
 #verificar si el ultimo caracter es una vocal
@@ -120,16 +113,16 @@ opcion = int(input("Selecciona la opción 1, 2 o 3: "))
 
 #transformar el nombre según la opción elegida
 if opcion == 1:
-    resultado = nombre.upper()  # Convierte todo a mayúsculas
+    nombre_mayuscula = nombre.upper()  # Convierte todo a mayúsculas
+    print(nombre_mayuscula)
 elif opcion == 2:
-    resultado = nombre.lower()  # Convierte todo a minúsculas
+    nombre_minuscula = nombre.lower()  # Convierte todo a minúsculas
+    print(nombre_minuscula)
 elif opcion == 3:
-    resultado = nombre.capitalize()  # Convierte la primera letra a mayúscula
+    nombre_primer_letra_mayuscula = nombre.capitalize()  # Convierte la primera letra a mayúscula
+    print(nombre_primer_letra_mayuscula)
 else:
-    resultado = "Opción no válida."
-
-#imprimir el resultado
-print("Resultado:", resultado)
+    print("Opción no válida.")
 
 #Pida la magnitud de un terremoto, clasifique la magnitud en una de las siguientes categorías y mostrar el resultado por pantalla:
 #● Menor que 3: "Muy leve" (imperceptible).
